@@ -1,0 +1,4 @@
+h2 Create New Movie
+=form_tag(movies_path, :class => 'form') do 
+    =label :movie, :title, 'Title', :class => 'form-control'
+    = text_ field :movie, :title, :class=> 'form-control'
