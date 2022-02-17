@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rotten Potatoes</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+    <nav class="navbar navbar-expand-lg bg-primary text-white mb-3">
+        <h1 class="title">Rotten Potatoes</h1>
+    </nav>
+  <body>
+    <div class="container">
+      <%- if flash[:notice] %>
+        <div class = " alert alert - info text - center " > <%=flash[:notice]%> </div>
+      <%- elsif flash[:alert] %>
+        <div class = " alert alert - danger text - center " > <%= flash[:alert]%> </div >
+      <%end%>
+      <main id="main">
+          <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>
