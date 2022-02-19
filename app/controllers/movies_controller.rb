@@ -8,4 +8,8 @@ class MoviesController < ApplicationController
     end
     def new
     end
+    def create
+        #write code here
+        
+    end
 end
