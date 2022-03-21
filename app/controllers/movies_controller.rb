@@ -7,26 +7,30 @@ class MoviesController < ApplicationController
         @movie = Movie.find(id)
     end
     def new
+        @movie = Movie.new
     end
     def create
-        if (@movie = Movie.create(movie_params))
+        @movie = Movie.create(movie_params)
+        if (@movie.valid?)
             redirect_to movies_path, :notice => "#{@movie.title} was successfully created."
         else
-            flas[:alert] = "Movie #{@movie.title} could not be created: "+
+            flash[:alert] = "Movie #{@movie.title} could not be created: "+
                 @movie.errors.full_messages.join(",")
-            render 'new'
+            render :new
         end
     end
-
     def edit
         @movie = Movie.find params[:id]
     end
-    
     def update
         @movie = Movie.find params[:id]
-        @movie.update_attributes!(movie_params)
-        flash[:notice] = "#{@movie.title} was successfully updated."
-        redirect_to movie_path(@movie)
+        if (@movie.update_attributes!(movie_params))
+            redirect_to movie_path(@movie), :notice => "#{@movie.title} was successfully updated."
+        else 
+            flash[:alert] = "#{@movie.title} could not be updated: " +
+                @movie.errors.full_messages.join(",")
+            render :edit
+        end
     end
 
     def destroy
